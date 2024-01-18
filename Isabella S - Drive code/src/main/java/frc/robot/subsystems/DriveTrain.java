@@ -15,11 +15,14 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.controls.Follower;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 public class DriveTrain extends SubsystemBase {
-  TalonFX frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
-
+  private TalonFX frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
+  private MotorControllerGroup leftMotors, rightMotors;
+  private DifferentialDrive differentialDrive;
   /** Creates a new ExampleSubsystem. */
+
   public DriveTrain() {
     frontLeftMotor = new TalonFX(Constants.FRONT_LEFT_MOTOR_ID);
     backLeftMotor = new TalonFX(Constants.BACK_LEFT_MOTOR_ID);
@@ -35,6 +38,11 @@ public class DriveTrain extends SubsystemBase {
     frontRightMotor.setInverted(Constants.RIGHT_MOTOR_INVERTED);
     backLeftMotor.setInverted(Constants.LEFT_MOTOR_INVERTED);
     backRightMotor.setInverted(Constants.RIGHT_MOTOR_INVERTED);
+
+    leftMotors = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
+    rightMotors = new MotorControllerGroup(frontRightMotor, backRightMotor);
+
+    differentialDrive = new DifferentialDrive(leftMotors, rightMotors);
   }
 
   /**
@@ -49,6 +57,19 @@ public class DriveTrain extends SubsystemBase {
         () -> {
           /* one-time action goes here */
         });
+  }
+
+  /**
+   * makes the robot drive
+   * 
+   * <p>
+   * 
+   * speed and rotation are double; range is [-1.0, 1.0]
+   * @param speed
+   * @param rotation
+   */
+  public void drive(double speed, double rotation) {
+    differentialDrive.arcadeDrive(speed, rotation);
   }
 
   /**
