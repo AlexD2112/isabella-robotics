@@ -7,15 +7,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.IsPROLicensedValue;
-
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class DriveTrain extends SubsystemBase {
   private TalonFX frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
@@ -28,11 +31,6 @@ public class DriveTrain extends SubsystemBase {
     backLeftMotor = new TalonFX(Constants.BACK_LEFT_MOTOR_ID);
     frontRightMotor = new TalonFX(Constants.FRONT_RIGHT_MOTOR_ID);
     backRightMotor = new TalonFX(Constants.BACK_RIGHT_MOTOR_ID);
-
-    frontLeftMotor.setNeutralMode(NeutralModeValue.Coast);
-    backLeftMotor.setNeutralMode(NeutralModeValue.Brake);
-    frontRightMotor.setNeutralMode(NeutralModeValue.Coast);
-    backRightMotor.setNeutralMode(NeutralModeValue.Brake);
 
     frontLeftMotor.setInverted(Constants.LEFT_MOTOR_INVERTED);
     frontRightMotor.setInverted(Constants.RIGHT_MOTOR_INVERTED);

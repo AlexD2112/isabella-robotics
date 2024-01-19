@@ -36,6 +36,7 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     speed = xboxController.getLeftY();
     rotation = xboxController.getRightX();
+    System.out.println(speed + " " + rotation);
     if (speed<0.05 && speed>-0.05) {
       speed = 0;
     }
