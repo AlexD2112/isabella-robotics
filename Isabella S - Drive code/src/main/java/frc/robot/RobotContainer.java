@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_exampleSubsystem = new DriveTrain();
+  private final DriveCommand driveCommand = new DriveCommand(m_exampleSubsystem);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -65,8 +66,8 @@ public class RobotContainer {
    *
    * @return the command to run in teleop
    */
-  // public Command getTeleopCommand() {
-  //   // An example command will be run in autonomous
-  //   return new Command();
-  // }
+  public Command getTeleopCommand() {
+    // An example command will be run in autonomous
+    return driveCommand;
+  }
 }
